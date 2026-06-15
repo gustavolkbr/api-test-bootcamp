@@ -1,6 +1,8 @@
 # TESTE EXPLORATORIO DE API SERVEREST
 - teste de exploração da API ServeRest "https://compassuol.serverest.dev/" na ordem em que eu fui testando 
 
+---
+
 ## USUARIOS
 
 - get /usuários
@@ -39,6 +41,8 @@
         - se tentar atualizar com id inexistente = retorna 201 created
             - deveria retornar algum erro 400 com usuário não encontrado, pois além de "desvio de função", isso pode gerar uma quantidade enorme de dados duplicados/errados nos bancos de dados
 
+---
+
 ## LOGIN
 
 - post /login (para fazer login)
@@ -53,6 +57,8 @@
 - post /login (sem campo body json)
     - satus 400 
     - mensagem de "email é obrigatório/password é obrigatório"
+
+---
 
 ## PRODUTOS
 
