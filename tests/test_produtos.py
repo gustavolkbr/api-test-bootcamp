@@ -1,6 +1,18 @@
+import json
+from pathlib import Path
 from uuid import uuid4
 
 import requests
+from jsonschema import validate
+
+
+PASTA_RAIZ = Path(__file__).resolve().parent.parent
+
+with open(
+    PASTA_RAIZ / "schemas" / "produto.json",
+    encoding="utf-8",
+) as arquivo:
+    SCHEMA_PRODUTO = json.load(arquivo)
 
 
 def test_listar_produtos(url_base):
@@ -110,6 +122,11 @@ def test_buscar_produto_por_id_valido(url_base, produto):
     assert resposta.status_code == 200, resposta.text
 
     corpo = resposta.json()
+
+    validate(
+        instance=corpo,
+        schema=SCHEMA_PRODUTO,
+    )
 
     assert corpo["_id"] == produto["_id"]
     assert corpo["nome"] == produto["nome"]

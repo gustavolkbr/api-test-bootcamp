@@ -1,6 +1,18 @@
+import json
+from pathlib import Path
 from uuid import uuid4
 
 import requests
+from jsonschema import validate
+
+
+PASTA_RAIZ = Path(__file__).resolve().parent.parent
+
+with open(
+    PASTA_RAIZ / "schemas" / "login_sucesso.json",
+    encoding="utf-8",
+) as arquivo:
+    SCHEMA_LOGIN_SUCESSO = json.load(arquivo)
 
 
 def test_login_com_credenciais_corretas(url_base, usuario):
@@ -14,6 +26,11 @@ def test_login_com_credenciais_corretas(url_base, usuario):
     assert resposta.status_code == 200, resposta.text
 
     corpo = resposta.json()
+
+    validate(
+        instance=corpo,
+        schema=SCHEMA_LOGIN_SUCESSO,
+    )
 
     assert corpo["message"] == "Login realizado com sucesso"
     assert corpo["authorization"]

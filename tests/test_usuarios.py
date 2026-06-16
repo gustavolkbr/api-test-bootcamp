@@ -1,6 +1,18 @@
+import json
+from pathlib import Path
 from uuid import uuid4
 
 import requests
+from jsonschema import validate
+
+
+PASTA_RAIZ = Path(__file__).resolve().parent.parent
+
+with open(
+    PASTA_RAIZ / "schemas" / "usuario.json",
+    encoding="utf-8",
+) as arquivo:
+    SCHEMA_USUARIO = json.load(arquivo)
 
 
 def test_listar_usuarios(url_base):
@@ -85,6 +97,11 @@ def test_buscar_usuario_por_id_valido(url_base, usuario):
     assert resposta.status_code == 200, resposta.text
 
     corpo = resposta.json()
+
+    validate(
+        instance=corpo,
+        schema=SCHEMA_USUARIO,
+    )
 
     assert corpo["_id"] == usuario["_id"]
     assert corpo["nome"] == usuario["nome"]
