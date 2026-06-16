@@ -156,6 +156,14 @@ def test_atualizar_produto(url_base, produto, token_administrador):
 
     assert produto_atualizado["nome"] == dados_atualizados["nome"]
     assert produto_atualizado["preco"] == dados_atualizados["preco"]
+    assert (
+        produto_atualizado["descricao"]
+        == dados_atualizados["descricao"]
+    )
+    assert (
+        produto_atualizado["quantidade"]
+        == dados_atualizados["quantidade"]
+    )
 
 
 def test_excluir_produto(url_base, produto, token_administrador):
@@ -181,6 +189,12 @@ def test_excluir_produto(url_base, produto, token_administrador):
 
 
 def test_excluir_produto_sem_token(url_base, produto):
+    resposta_busca = requests.get(
+        f"{url_base}/produtos/{produto['_id']}"
+    )
+
+    assert resposta_busca.status_code == 200, resposta_busca.text
+
     resposta = requests.delete(f"{url_base}/produtos/{produto['_id']}")
 
     assert resposta.status_code == 401, resposta.text

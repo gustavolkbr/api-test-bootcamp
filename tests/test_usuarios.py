@@ -129,6 +129,14 @@ def test_atualizar_usuario(url_base, usuario):
 
     assert usuario_atualizado["nome"] == dados_atualizados["nome"]
     assert usuario_atualizado["email"] == dados_atualizados["email"]
+    assert (
+        usuario_atualizado["password"]
+        == dados_atualizados["password"]
+    )
+    assert (
+        usuario_atualizado["administrador"]
+        == dados_atualizados["administrador"]
+    )
 
 
 def test_atualizar_usuario_para_email_duplicado(

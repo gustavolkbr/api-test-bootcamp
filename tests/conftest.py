@@ -33,7 +33,7 @@ def usuario(url_base):
         requests.delete(f"{url_base}/usuarios/{id_usuario}")
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="session")
 def usuario_administrador(url_base):
     dados_usuario = {
         "nome": "Guilherme",
@@ -73,7 +73,7 @@ def token_usuario(url_base, usuario):
     return corpo["authorization"]
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="session")
 def token_administrador(url_base, usuario_administrador):
     dados_login = {
         "email": usuario_administrador["email"],

@@ -25,6 +25,12 @@ def test_login_com_senha_incorreta(url_base, usuario):
         "password": "senha_incorreta",
     }
 
+    resposta_busca = requests.get(
+        f"{url_base}/usuarios/{usuario['_id']}"
+    )
+
+    assert resposta_busca.status_code == 200, resposta_busca.text
+
     resposta = requests.post(f"{url_base}/login", json=dados_login)
 
     assert resposta.status_code == 401, resposta.text
