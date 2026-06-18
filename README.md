@@ -277,8 +277,6 @@ Também ficaram fora alguns cenários adicionais que poderiam aumentar a cobertu
 
 Esses cenários não foram incluídos porque o foco do projeto foi atender aos fluxos solicitados para usuários, login e produtos dentro do tempo disponível para a entrega.
 
-A validação utilizando JSON Schema também não foi implementada, pois fazia parte dos desafios extras opcionais.
-
 ## Bugs encontrados
 
 Durante os testes exploratórios, foram encontrados comportamentos em que uma requisição de atualização utilizando um ID inexistente cria um novo registro.
